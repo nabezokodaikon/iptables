@@ -1,4 +1,4 @@
-#I/bin/bash
+#!/bin/bash
 
 iptables -F
 iptables -X
