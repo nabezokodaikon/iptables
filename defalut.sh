@@ -40,5 +40,5 @@ iptables -A INPUT -p tcp -j REJECT --reject-with tcp-rst
 iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
 
 # ssh 接続を許可する。
-iptables -A INPUT -p tcp --dport $ssh_port -j ACCEPT
+iptables -A TCP -p tcp --dport $ssh_port -j ACCEPT
 
