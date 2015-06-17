@@ -31,3 +31,11 @@ $ iptables -nvL
 $ cat /etc/iptables/iptables.rules
 ```
 
+### iptables のルール削除
+```
+# 削除するルールのチェインと番号を確認する。
+$ iptables -nvL --line-numbers
+
+# チェインと番号を指定して削除する。
+$ iptables -D <チェイン> <番号>
+```
