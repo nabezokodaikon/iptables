@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# ロガー
+logger='-m limit --limit 5/m --limit-burst 10 -j LOG'
+
 # ssh ポート番号
 ssh_port=22
 
@@ -23,6 +26,7 @@ iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 
 # 無効状態のパケットを破棄する。
+iptables -A INPUT -m conntrack --ctstate INVALID ${logger}
 iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
 
 # ping を許可する。
@@ -33,10 +37,13 @@ iptables -A INPUT -p udp -m conntrack --ctstate NEW -j UDP
 iptables -A INPUT -p tcp --syn -m conntrack --ctstate NEW -j TCP
 
 # UDP、TCP のアクセスに対する拒否の条件を指定する。
+iptables -A INPUT -p udp ${logger}
 iptables -A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
+iptables -A INPUT -p tcp ${logger}
 iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
 
 # 他のプロトコルによるアクセスを拒否する。
+iptables -A INPUT ${logger}
 iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
 
 # ssh 接続を許可する。

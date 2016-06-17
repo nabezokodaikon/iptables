@@ -32,3 +32,9 @@ $ iptables -nvL --line-numbers
 # チェインと番号を指定して削除する。
 $ iptables -D <チェイン> <番号>
 ```
+
+### ログの確認方法
+```
+# マシンが最後に起動したときから記録されたパケットを全て表示する。
+$ sudo journalctl -k | grep "IN=.*OUT=.*" | less
+```
