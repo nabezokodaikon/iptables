@@ -26,7 +26,7 @@ iptables -A INPUT -i lo -j ACCEPT
 iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
 
 # ping を許可する。
-iptables -A INPUT -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+# iptables -A INPUT -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
 
 # 作成した UDP、TCP チェインへのジャンプ条件を設定する。
 iptables -A INPUT -p udp -m conntrack --ctstate NEW -j UDP
