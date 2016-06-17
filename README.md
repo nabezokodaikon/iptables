@@ -1,23 +1,16 @@
 # iptables のコマンドを実行するスクリプト
 
-**参考**
-
+## 参考
 [Simple stateful firewall](https://wiki.archlinux.org/index.php/Simple_stateful_firewall)
 
-## reset.sh
-iptables に初期設定を適用します。
-
-## default.sh
-iptables にデフォルトの設定を適用します。
-
-> ssh 接続のみ許可します。
-
-> スクリプトの先頭で任意のポート番号を設定できます。(デフォルト: 22)
-
-## save.sh
-iptables に適用した設定を保存します。
+## 使い方
+1. `reset.sh`を実行し、初期設定を適用します。
+1. `default.sh`を実行し、iptablesに規定値を設定します。
+1. `save.sh`を実行し、iptablesに適用した設定を保存します。
+1. iptablesサービスを再起動します。
 
 ## 備考
+
 ### iptables サービス操作
 ```
 $ systemctl [start|stop|status|restart] iptables 
